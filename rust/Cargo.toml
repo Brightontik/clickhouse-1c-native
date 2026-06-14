@@ -1,0 +1,29 @@
+[package]
+name = "click_house_component"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "click_house_component"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+native_api_1c = "0.10.5"
+utf16_lit = "2.0.2"
+clickhouse = { version = "0.14", features = ["lz4"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio-retry2 = { version = "0.6", features = ["jitter"] }
+
+[profile.dev.package]
+insta.opt-level = 3
+similar.opt-level = 3
+
+[dev-dependencies]
+insta = { version = "1.31.0", features = ["redactions"] }
+
+[[test]]
+name = "integration_test"
+path = "test/integration_test.rs"
